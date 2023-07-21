@@ -1,0 +1,41 @@
+﻿@model Insolvency.CommonServices.MockWorldpay.Data.OrderData
+@{
+    ViewBag.Title = "Select Payment Method";
+}
+
+<div class="property-label">Order Code</div>
+<div class="property-value">@Model.OrderCode</div>
+
+<div class="property-label">Merchant</div>
+<div class="property-value">@Model.MerchantCode</div>
+
+<div class="property-label">Description</div>
+<div class="property-value">@Model.Description</div>
+
+<div class="property-label">Amount</div>
+<div class="property-value">@Model.ValueInPounds</div>
+
+
+@using (Html.BeginForm("Submit", "SelectPaymentMethod", FormMethod.Post))
+{
+
+    <input type="hidden" id="orderKey" name="orderKey" value="@ViewBag.OrderKey" />
+
+    <input type="hidden" id="successURL" name="successURL" value="@ViewBag.SuccessURL" />
+
+    <input type="hidden" id="pendingURL" name="pendingURL" value="@ViewBag.PendingURL" />
+
+    <input type="hidden" id="failureURL" name="failureURL" value="@ViewBag.FailureURL" />
+
+    <input type="hidden" id="cancelURL" name="cancelURL" value="@ViewBag.CancelURL" />
+
+    <br />
+    <br />
+
+    <button role="button" type="submit" id="SuccessResult" name="result" class="btn btn-success" value="success"><span class="glyphicon glyphicon-ok"></span> Authorise</button>
+
+    <button role="button" type="submit" id="RefuseResult" name="result" class="btn btn-danger" value="refuse"><span class="glyphicon glyphicon-remove-circle"></span> Refuse</button>
+
+    <button role="button" type="submit" id="CancelResult" name="result" class="btn btn-warning" value="cancel"><span class="glyphicon glyphicon-arrow-left"></span> Cancel</button>
+
+}

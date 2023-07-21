@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "810dc93e-caef-4bfd-b2ec-4971c78b59bf",
+		"name": "INSS - Worldpay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Worldpay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrderCode\": \"abcd\",\r\n    \"Description\": \"some desc\",\r\n    \"OrderValue\": 10.60,\r\n    \"Email\": \"test@test.com\",\r\n    \"FirstName\": \"abcd\",\r\n    \"LastName\": \"efgh\",\r\n    \"IncludeAddress\": true,\r\n    \"Address1\": \"1 test street\",\r\n    \"Address2\": \"test add2\",\r\n    \"Address3\": \"test add3\",\r\n    \"PostCode\": \"AA1 1AA\",\r\n    \"City\": \"abcd\",\r\n    \"State\": \"abcd\",\r\n    \"CountryCode\": \"abcd\",\r\n    \"TelephoneNumber\": \"abcd\",\r\n    \"CurrencyCode\": \"abcd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{WorldparyBaseURL}}/worldpay/:installationid",
+					"host": [
+						"{{WorldparyBaseURL}}"
+					],
+					"path": [
+						"worldpay",
+						":installationid"
+					],
+					"variable": [
+						{
+							"key": "installationid",
+							"value": "abcd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Worldpay refund",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"OrderCode\": \"abcd\",\r\n    \"RefundValue\": 10.60,\r\n    \"CurrencyCode\": \"abcd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{WorldparyBaseURL}}/worldpay/:installationid/refund",
+					"host": [
+						"{{WorldparyBaseURL}}"
+					],
+					"path": [
+						"worldpay",
+						":installationid",
+						"refund"
+					],
+					"variable": [
+						{
+							"key": "installationid",
+							"value": "abcd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Worldpay cancel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{WorldparyBaseURL}}/worldpay/:installationid/cancel/:orderCode",
+					"host": [
+						"{{WorldparyBaseURL}}"
+					],
+					"path": [
+						"worldpay",
+						":installationid",
+						"cancel",
+						":orderCode"
+					],
+					"variable": [
+						{
+							"key": "installationid",
+							"value": "abcd"
+						},
+						{
+							"key": "orderCode",
+							"value": "abcd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<paymentService version=\"1.4\">\r\n  <notify>\r\n    <orderStatusEvent orderCode=\"abcd\">\r\n      <payment>\r\n        <paymentMethod>ECMC-SSL</paymentMethod>\r\n        <amount value=\"1060\" currencyCode=\"abcd\" exponent=\"2\" debitCreditIndicator=\"credit\" />\r\n        <lastEvent>khddh</lastEvent>\r\n        <balance accountType=\"IN_PROCESS_AUTHORISED\">\r\n          <amount value=\"1060\" currencyCode=\"abcd\" exponent=\"2\" debitCreditIndicator=\"credit\" />\r\n        </balance>\r\n        <cardNumber>5255********2490</cardNumber>\r\n        <riskScore>0</riskScore>\r\n      </payment>\r\n    </orderStatusEvent>\r\n  </notify>\r\n</paymentService>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{WorldparyBaseURL}}/orderupdate",
+					"host": [
+						"{{WorldparyBaseURL}}"
+					],
+					"path": [
+						"orderupdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Proxy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<paymentService version=\"1.4\" merchantCode=\"INSSDRO\">\r\n  <submit>\r\n    <order orderCode=\"abcd\" installationId=\"abcd\">\r\n      <description>some desc</description>\r\n      <amount currencyCode=\"abcd\" exponent=\"2\" value=\"1060\" />\r\n      <orderContent><![CDATA[<strong>some desc: £10.60</strong>]]></orderContent>\r\n      <paymentMethodMask>\r\n        <include code=\"ALL\" />\r\n      </paymentMethodMask>\r\n      <shopper>\r\n        <shopperEmailAddress>test@test.com</shopperEmailAddress>\r\n      </shopper>\r\n      <shippingAddress>\r\n        <address>\r\n          <firstName>abcd</firstName>\r\n          <lastName>efgh</lastName>\r\n          <address1>1 test street</address1>\r\n          <address2>test add2</address2>\r\n          <address3>test add3</address3>\r\n          <postalCode>AA1 1AA</postalCode>\r\n          <city>abcd</city>\r\n          <countryCode>abcd</countryCode>\r\n        </address>\r\n      </shippingAddress>\r\n      <billingAddress>\r\n        <address>\r\n          <firstName>abcd</firstName>\r\n          <lastName>efgh</lastName>\r\n          <address1>1 test street</address1>\r\n          <address2>test add2</address2>\r\n          <address3>test add3</address3>\r\n          <postalCode>AA1 1AA</postalCode>\r\n          <city>abcd</city>\r\n          <countryCode>abcd</countryCode>\r\n          <telephoneNumber>abcd</telephoneNumber>\r\n        </address>\r\n      </billingAddress>\r\n      <riskData>\r\n        <authenticationRiskData authenticationMethod=\"localAccount\">\r\n          <authenticationTimestamp>\r\n            <date year=\"2022\" month=\"5\" dayOfMonth=\"27\" hour=\"14\" minute=\"26\" second=\"1\" />\r\n          </authenticationTimestamp>\r\n        </authenticationRiskData>\r\n        <shopperAccountRiskData previousSuspiciousActivity=\"false\" shippingNameMatchesAccountName=\"true\" />\r\n        <transactionRiskData shippingMethod=\"digital\" deliveryTimeframe=\"electronicDelivery\" preOrderPurchase=\"true\" />\r\n      </riskData>\r\n    </order>\r\n  </submit>\r\n</paymentService>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{WorldparyBaseURL}}/proxy",
+					"host": [
+						"{{WorldparyBaseURL}}"
+					],
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

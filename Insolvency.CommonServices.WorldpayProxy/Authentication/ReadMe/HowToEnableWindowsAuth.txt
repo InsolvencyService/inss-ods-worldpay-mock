@@ -1,0 +1,23 @@
+﻿1. Click the INSS.ODS.EBF.App project in the solution explorer and in the properties window make the following changes.
+	A- AnonymousAuthentication: Disabled
+	B- WindowsAuthentication: Enabled
+
+2. In the INSS.ODS.EBF.App project's web.config make the following changes.
+	A- Add the setting below to the app settings section
+		<add key="owin:AutomaticAppStartup" value="false" />
+	B- Add the sections below
+		  <system.web>
+			<authorization>
+			  <deny users="?" />
+			</authorization>
+			<roleManager defaultProvider="WindowsProvider" enabled="true" cacheRolesInCookie="false">
+			  <providers>
+				<add name="WindowsProvider" applicationName="ElectronicBankruptcyFolder" type="INSS.ODS.EBF.App.WindowsAuthentication.WindowsTokenCacheRoleProvider" />
+			  </providers>
+			</roleManager>
+		  </system.web>
+	C- Change authentication element to the below
+		  <system.web>
+			<authentication mode="Windows" />
+		  </system.web>
+				

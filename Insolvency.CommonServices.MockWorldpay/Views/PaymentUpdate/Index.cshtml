@@ -1,0 +1,78 @@
+﻿@model List<Insolvency.CommonServices.MockWorldpay.Data.OrderData>
+
+@{
+    ViewBag.Title = "Payment Update";
+}
+
+
+<p>
+    Here you can simulate a payment update via the payment status update service.
+</p>
+<br/>
+
+@using (Html.BeginForm("Update", "PaymentUpdate", FormMethod.Post))
+{
+
+
+    <table class="table">
+
+        <thead>
+
+        <tr>
+            <th>Order Code</th>
+            <th>Description</th>
+            <th>Value</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+            @{ var i = 0; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.OrderCode
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.ValueInPounds&nbsp;@item.Currency
+                    </td>
+                    <td>
+                        @item.Status
+                    </td>
+                    <td>
+
+                        <select name="updatedStatus">
+                            <option>AUTHORISED</option>
+                            <option>CAPTURED</option>
+                            <option>SETTLED</option>
+                            <option>REFUSED</option>
+                            <option>ERROR</option>
+                            <option>CANCELLED</option>
+                            <option>CHARGED_BACK</option>
+                            <option>EXPIRED</option>
+                            <option>SENT_FOR_REFUND</option>
+                        </select>
+                        <input name="orderCode" type="hidden" value="@item.OrderCode"/>
+                        <input name="status" type="hidden" value="@item.Status"/>
+                        <button name="update" type="submit" value="@i" class="btn btn-success">Update</button>
+                    </td>
+                </tr>
+
+                i++;
+
+            }
+
+        </tbody>
+
+
+
+    </table>
+
+
+}
