@@ -82,18 +82,19 @@ stages:
 #        merchantCode: $(MerchantCode)
 #        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         
-## - stage: DeploySIT
-##   displayName: 'Deploy to SIT'
-##   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-##   variables:
-##     - group: Worldpay-SIT
-##   jobs:
-##     - template: deploy-jobs-template.yml
-##       parameters:
-##         environment: 'SIT'
+ - stage: DeploySIT
+   displayName: 'Deploy to SIT'
+   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+   variables:
+     - group: Worldpay-SIT
+   jobs:
+     - template: deploy-jobs-template.yml
+       parameters:
+         environment: 'SIT'
+         appInsightsConnectionString: $(AppInsightsConnectionString)
 ##         merchantCode: $(MerchantCode)
 ##         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-##         appInsightsConnectionString: $(AppInsightsConnectionString)
+         
 ## 
 ## - stage: DeployPreProd
 ##   displayName: 'Deploy to PreProd'
